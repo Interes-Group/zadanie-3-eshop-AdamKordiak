@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface IproductService {
 
-    List<Product> getAll();
-    Product create(ProductRequest request);
+    Product createProduct(ProductRequest request);
     Product getProductById(Long id);
     Product getAmountById(Long id);
     Product addmoreAmount(Long id, ProductRequest request);
     Product updateProduct(Long id , ProductEditRequest editRequest);
     Product getById(Long id);
-    Product save(Product product);
+    Product saveProduct(Product product);
+    List<Product> getAll();
     void deleteProduct(Long id);
 }

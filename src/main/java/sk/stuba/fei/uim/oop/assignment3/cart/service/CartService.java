@@ -67,19 +67,22 @@ public class CartService implements ICartService {
             if (productListIterator.getProductId().equals(productRequest.getProductId())) {
                 int newAmount = productListIterator.getAmount() + productRequest.getAmount();
                 productListIterator.setAmount(newAmount);
-                this.iProductService.save(product1);
+                this.iProductService.saveProduct(product1);
                 return this.repository.save(cart);
             }
         }
         ProductList productList = new ProductList();
 
         this.productListRepository.save(productList);
+
         productList.setProductId(productRequest.getProductId());
         productList.setAmount(productRequest.getAmount());
         cart.getShoppingList().add(productList);
+
         int decreaseAmount = product1.getAmount() - productRequest.getAmount();
         product1.setAmount(decreaseAmount);
-        this.iProductService.save(product1);
+
+        this.iProductService.saveProduct(product1);
 
         return this.repository.save(cart);
     }

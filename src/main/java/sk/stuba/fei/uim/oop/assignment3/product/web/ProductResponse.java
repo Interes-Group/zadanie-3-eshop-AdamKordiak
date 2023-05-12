@@ -16,13 +16,12 @@ public class ProductResponse {
     private String unit;
 
     public ProductResponse(Product product) {
-        if(product!=null) {
             this.id = product.getId();
             this.name = product.getName();
             this.description = product.getDescription();
             this.amount = product.getAmount();
             this.price = product.getPrice();
             this.unit = product.getUnit();
-        }
+
     }
 }

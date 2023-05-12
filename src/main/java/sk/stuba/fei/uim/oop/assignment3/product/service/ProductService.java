@@ -22,7 +22,7 @@ public class ProductService  implements IproductService {
     }
 
     @Override
-    public Product create(ProductRequest request) {
+    public Product createProduct(ProductRequest request) {
         Product newProduct = new Product();
 
         newProduct.setPrice(request.getPrice());
@@ -44,10 +44,10 @@ public class ProductService  implements IproductService {
 
     @Override
     public Product addmoreAmount(Long id,ProductRequest request) {
-        Product newAmountProduct = this.repository.findById(id).orElseThrow();
-        newAmountProduct.setAmount(newAmountProduct.getAmount()+request.getAmount());
+        Product newProduct = this.repository.findById(id).orElseThrow();
+        newProduct.setAmount(newProduct.getAmount()+request.getAmount());
 
-        return this.repository.save(newAmountProduct);
+        return this.repository.save(newProduct);
     }
     @Override
     public void  deleteProduct(Long id) {
@@ -78,10 +78,9 @@ public class ProductService  implements IproductService {
 
         return this.repository.save(UpdateProduct);
     }
-
     @Override
     public Product getById(Long id) {return this.repository.findProductById(id);}
     @Override
-    public Product save(Product product) {return this.repository.save(product);}
+    public Product saveProduct(Product product) {return this.repository.save(product);}
 
 }

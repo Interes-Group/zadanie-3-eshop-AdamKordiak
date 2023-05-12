@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import sk.stuba.fei.uim.oop.assignment3.cart.data.Cart;
 import sk.stuba.fei.uim.oop.assignment3.cart.service.ICartService;
 import sk.stuba.fei.uim.oop.assignment3.exceptions.RequestException;
 import sk.stuba.fei.uim.oop.assignment3.product.lists.ProductListRequest;
@@ -18,16 +19,22 @@ public class CartController {
     @Autowired
     private ICartService service;
     @PostMapping()
-    public ResponseEntity<CartResponse> createCart(){
-        return new ResponseEntity<>(new CartResponse(this.service.create()), HttpStatus.CREATED);
+    public ResponseEntity<CartResponse> createCart() {
+        Cart cart = this.service.create();
+        CartResponse cartResponse = new CartResponse(cart);
+        return ResponseEntity.status(HttpStatus.CREATED).body(cartResponse);
     }
     @GetMapping()
-    public List<CartResponse> GetCart(){
-        return  this.service.getAll().stream().map(CartResponse::new).collect(Collectors.toList());
+    public List<CartResponse> getCart() {
+        return this.service.getAll()
+                .stream()
+                .map(cart -> new CartResponse(cart))
+                .collect(Collectors.toList());
     }
     @GetMapping("{id}")
     public CartResponse getCartById(@PathVariable("id") Long id){
-        return new CartResponse(this.service.findCartById(id));
+        CartResponse cartResponse = new CartResponse(this.service.findCartById(id));
+        return cartResponse;
     }
     @DeleteMapping("{id}")
     public void deleteCardById(@PathVariable("id") Long id){
@@ -35,7 +42,8 @@ public class CartController {
     }
     @PostMapping("{id}/add")
     public CartResponse addProduct(@PathVariable("id") Long id ,@RequestBody ProductListRequest request) throws RequestException {
-        return new CartResponse(this.service.addProductById(id,request));
+        CartResponse cartResponse = new CartResponse(this.service.addProductById(id,request));
+        return cartResponse ;
     }
     @GetMapping("{id}/pay")
     public String payForShoppingCart(@PathVariable("id") Long id)throws RequestException {
