@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sk.stuba.fei.uim.oop.assignment3.cart.service.ICartService;
-import sk.stuba.fei.uim.oop.assignment3.exceptions.BadRequestException;
+import sk.stuba.fei.uim.oop.assignment3.exceptions.RequestException;
 import sk.stuba.fei.uim.oop.assignment3.product.lists.ProductListRequest;
 
 import java.util.List;
@@ -34,11 +34,11 @@ public class CartController {
         this.service.deleteCart(id);
     }
     @PostMapping("{id}/add")
-    public CartResponse addProduct(@PathVariable("id") Long id ,@RequestBody ProductListRequest request) throws BadRequestException {
+    public CartResponse addProduct(@PathVariable("id") Long id ,@RequestBody ProductListRequest request) throws RequestException {
         return new CartResponse(this.service.addProductById(id,request));
     }
     @GetMapping("{id}/pay")
-    public String payForShoppingCart(@PathVariable("id") Long id)throws  BadRequestException{
+    public String payForShoppingCart(@PathVariable("id") Long id)throws RequestException {
         return this.service.pay(id);
     }
 }

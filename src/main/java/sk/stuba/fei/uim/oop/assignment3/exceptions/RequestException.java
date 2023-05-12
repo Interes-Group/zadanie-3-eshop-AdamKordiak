@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-public class BadRequestException extends Throwable {
-    @ExceptionHandler(value = {BadRequestException.class})
+public class RequestException extends Throwable {
+    @ExceptionHandler(value = {RequestException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public void handleException(){
     }

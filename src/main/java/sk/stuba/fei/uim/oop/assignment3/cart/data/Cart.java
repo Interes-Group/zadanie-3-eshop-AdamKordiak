@@ -20,6 +20,6 @@ public class Cart {
     private Long id;
 
     @OneToMany
-    private List<ProductList> shoppinglist = new ArrayList<>();
+    private List<ProductList> shoppingList = new ArrayList<>();
     private boolean payed = false;
 }

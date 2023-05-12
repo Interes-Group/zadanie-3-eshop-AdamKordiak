@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.NoSuchElementException;
 @ControllerAdvice
-public class NotFoundControllerAdvice {
+public class NotFoundController {
     @ExceptionHandler(value = {NotFoundException.class, NoSuchElementException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public void handleException(){

@@ -59,24 +59,24 @@ public class ProductService  implements IproductService {
     @Override
     public Product updateProduct(Long id, ProductEditRequest editRequest) {
 
-        Product productForUpdate = this.repository.findById(id).orElseThrow();
+        Product UpdateProduct = this.repository.findById(id).orElseThrow();
 
         if(editRequest.getName()==null && editRequest.getDescription()==null){
-            return this.repository.save(productForUpdate);
+            return this.repository.save(UpdateProduct);
         }
         else if(editRequest.getDescription()==null){
-            productForUpdate.setName(editRequest.getName());
+            UpdateProduct.setName(editRequest.getName());
         }
         else if(editRequest.getName()==null ){
-            productForUpdate.setDescription(editRequest.getDescription());
+            UpdateProduct.setDescription(editRequest.getDescription());
         }
 
         else {
-            productForUpdate.setName(editRequest.getName());
-            productForUpdate.setDescription(editRequest.getDescription());
+            UpdateProduct.setName(editRequest.getName());
+            UpdateProduct.setDescription(editRequest.getDescription());
         }
 
-        return this.repository.save(productForUpdate);
+        return this.repository.save(UpdateProduct);
     }
 
     @Override
